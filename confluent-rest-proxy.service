@@ -1,0 +1,15 @@
+[Unit]
+Description=Confluent REST Proxy
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Environment="LOG_DIR=/var/log/kafka-rest"
+Environment="KAFKA_REST_HEAP_OPTS=-Xmx512M"
+ExecStart=/opt/confluent-rest-proxy/bin/kafka-rest-start /etc/kafka-rest/kafka-rest.properties
+ExecStop=/opt/confluent-rest-proxy/bin/kafka-rest-stop
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
